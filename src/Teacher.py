@@ -1,11 +1,12 @@
 from src.Person import Person
+
 from src.Course import Course
 
 
 class Teacher(Person):
     def __init__(self, name):
         super().__init__(name)
-        self.subject_specialty: str
+        self.subject_specialty: str = ''
         self.courses_teaching: list[Course] = []
 
     def assign_grade(self):
@@ -19,7 +20,5 @@ class Teacher(Person):
         pass
 
     def __repr__(self):
-        output = ""
-        for _, var in vars(self).items():
-            output += str(var)
-        return output
+        return (f' subject_specialty = {self.subject_specialty}, '
+                f'courses_teaching = {self.courses_teaching}')

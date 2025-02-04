@@ -7,7 +7,4 @@ class Person:
         self.name = name
 
     def __repr__(self):
-        output = ""
-        for _, var in vars(self).items():
-            output += str(var)
-        return output
+        return f'id: {self.id}, name: {self.name}'

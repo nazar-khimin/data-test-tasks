@@ -30,7 +30,5 @@ class School:
         self.courses.remove(course)
 
     def __repr__(self):
-        output = ""
-        for _, var in vars(self).items():
-            output += str(var)
-        return output
+        return (f'name = {self.name}, students = {self.students}, '
+                f'teachers = {self.teachers}, courses = {self.courses}')

@@ -9,8 +9,8 @@ class Student(Person):
     def __init__(self, name):
         super().__init__(name)
         self.courses: list["Course"] = []
-        self.grades: list[int]
-        self.grade_level: list[int]
+        self.grades: list[int] = []
+        self.grade_level: list[int] = []
 
     def enroll_course(self, course: "Course"):
         self.courses.append(course)
@@ -25,7 +25,6 @@ class Student(Person):
         pass
 
     def __repr__(self):
-        output = ""
-        for _, var in vars(self).items():
-            output += str(var)
-        return output
+        return (f' courses = {self.courses}, '
+                f'grades = {self.grades}, '
+                f'grade_level = {self.grade_level}')

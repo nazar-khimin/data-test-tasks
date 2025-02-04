@@ -1,6 +1,7 @@
 import uuid
 from src.Student import Student
 
+
 class Course:
     def __init__(self, name: str, teacher, max_capacity, required_grade_level, _credits):
         self.id = uuid.uuid4()
@@ -24,12 +25,7 @@ class Course:
         pass
 
     def __repr__(self):
-        output = ""
-        for _, var in vars(self).items():
-            output += str(var)
-        return output
-
-
-
-
-
+        return (f'id = {self.id}, name = {self.name}, teacher = {self.teacher}, '
+                f'students = {self.students}, max_capacity = {self.max_capacity}, '
+                f'max_capacity = {self.max_capacity}, required_grade_level = {self.required_grade_level}, '
+                f'credits = {self.credits}')
