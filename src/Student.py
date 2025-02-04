@@ -1,5 +1,5 @@
-from Person import Person
-from Course import Course
+from src.Person import Person
+from src.Course import Course
 
 
 class Student(Person):

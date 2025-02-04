@@ -1,4 +1,3 @@
-from src.Person import Person
 from src.School import School
 from src.Student import Student
 from src.Teacher import Teacher
