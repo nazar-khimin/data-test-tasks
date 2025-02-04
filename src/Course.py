@@ -14,6 +14,7 @@ class Course:
 
     def add_student(self, student: Student):
         self.students.append(student)
+        student.enroll_course(self)
 
     def remove_student(self, student: Student):
         self.students.remove(student)

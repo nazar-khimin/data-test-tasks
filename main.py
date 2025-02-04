@@ -12,7 +12,6 @@ course = Course("Math", teacher1, 5, 4, 5)
 # add teacher and student to course
 teacher1.add_course(course)
 course.add_student(student1)
-student1.enroll_course(course)
 
 # assign grade
 # teacher1.assign_grade(course, teacher1)
