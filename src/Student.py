@@ -1,15 +1,18 @@
+from typing import TYPE_CHECKING
 from src.Person import Person
-from src.Course import Course
+
+if TYPE_CHECKING:
+    from src.Course import Course
 
 
 class Student(Person):
     def __init__(self, name):
         super().__init__(name)
-        self.courses: list[Course] = []
+        self.courses: list["Course"] = []
         self.grades: list[int]
         self.grade_level: list[int]
 
-    def enroll_course(self, course: Course):
+    def enroll_course(self, course: "Course"):
         self.courses.append(course)
 
     def add_grade(self):
