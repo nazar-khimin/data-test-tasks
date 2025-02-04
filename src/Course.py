@@ -1,5 +1,6 @@
 import uuid
 from src.Student import Student
+from src.utils.Validations import validate_grade_level
 
 
 class Course:
@@ -9,7 +10,7 @@ class Course:
         self.teacher = teacher
         self.students: list[Student] = []
         self.max_capacity = max_capacity
-        self.required_grade_level = required_grade_level
+        self.required_grade_level = validate_grade_level(required_grade_level)
         self.credits = _credits
 
     def add_student(self, student: Student):
