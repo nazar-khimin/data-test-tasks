@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 from src.Person import Person
+from src.utils.Validations import validate_grade_value
 
 if TYPE_CHECKING:
     from src.Course import Course
@@ -15,7 +16,8 @@ class Student(Person):
     def enroll_course(self, course: "Course"):
         self.courses.append(course)
 
-    def add_grade(self):
+    def add_grade(self, grade):
+        validate_grade_value(grade)
         pass
 
     def calculate_gpa(self):
