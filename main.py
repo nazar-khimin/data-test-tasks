@@ -6,7 +6,7 @@ from src.Course import Course
 # prepare data
 school = School("СЗШ 32")
 student1 = Student("Nazar")
-student2 = Student("Nazar")
+student2 = Student("Bohdan")
 teacher1 = Teacher("Mykola")
 course = Course("Math", teacher1, 5, 4, 5)
 
@@ -16,7 +16,8 @@ course.add_student(student1)
 course.add_student(student2)
 
 # assign grade
-teacher1.assign_grade(course, student1, 2)
+teacher1.assign_grade(course, student1, 4)
+teacher1.assign_grade(course, student2, 5)
 
 # add all to school
 school.add_student(student1)
@@ -25,8 +26,10 @@ school.add_teacher(teacher1)
 school.add_course(course)
 
 # calculate GPA for students
-gpa = student1.calculate_gpa()
-print(f'GPA for student {student1.name} : {gpa}')
+gpa1 = student1.calculate_gpa()
+gpa2 = student2.calculate_gpa()
+print(f'GPA for student {student1.name} : {gpa1}')
+print(f'GPA for student {student2.name} : {gpa2}')
 
 # display information about students, teacher, and courses
 print(course)
