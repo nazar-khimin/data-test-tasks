@@ -14,11 +14,11 @@ class Teacher(Person):
 
     def add_course(self, course: Course):
         self.courses_teaching.append(course)
-        pass
 
-    def remove_course(self):
-        pass
+    def remove_course(self, course: Course):
+        self.courses_teaching.remove(course)
 
     def __repr__(self):
-        return (f' subject_specialty = {self.subject_specialty}, '
+        return (f'{super().__repr__()} '
+                f'subject_specialty = {self.subject_specialty}, '
                 f'courses_teaching = {self.courses_teaching}')
