@@ -30,12 +30,12 @@ class School:
         self.courses.remove(course)
 
     def __repr__(self):
-        courses_id = [course.id for course in self.courses]
-        teachers_id = [teacher.id for teacher in self.teachers]
-        students_id = [student.id for student in self.students]
+        courses_name = [course.name for course in self.courses]
+        teachers_name = [teacher.name for teacher in self.teachers]
+        students_name = [student.name for student in self.students]
         return (f'School('
                 f'name = {self.name!r}, '
-                f'students = {students_id!r}, '
-                f'teachers = {teachers_id!r}, '
-                f'courses = {courses_id!r}'
+                f'students = {students_name!r}, '
+                f'teachers = {teachers_name!r}, '
+                f'courses = {courses_name!r}'
                 f')')

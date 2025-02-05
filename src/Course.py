@@ -27,13 +27,13 @@ class Course:
         pass
 
     def __repr__(self):
-        students_id = [student.id for student in self.students]
+        students_name = [student.name for student in self.students]
         return (f'Course('
                 f'id = {self.id!r}, '
                 f'name = {self.name!r}, '
-                f'teacher = {self.teacher.id!r}, '
-                f'students = {students_id!r}, '
-                f'max_capacity = {self.max_capacity!r},'
+                f'teacher = {self.teacher.name!r}, '
+                f'students = {students_name!r}, '
+                f'max_capacity = {self.max_capacity!r}, '
                 f'required_grade_level = {self.required_grade_level!r}, '
                 f'credits = {self.credits!r}'
                 f')')
