@@ -1,0 +1,2 @@
+class CourserMaxStudentsLimitException(Exception):
+    pass

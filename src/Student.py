@@ -10,15 +10,14 @@ class Student(Person):
     def __init__(self, name):
         super().__init__(name)
         self.courses: list["Course"] = []
-        self.grades: list[int] = []
+        self.grades: dict["Course", int] = {}
         self.grade_level: list[int] = []
 
     def enroll_course(self, course: "Course"):
         self.courses.append(course)
 
-    def add_grade(self, grade):
-        validate_grade_value(grade)
-        pass
+    def add_grade(self, course: "Course", grade):
+        self.grades[course] = grade
 
     def calculate_gpa(self):
         """

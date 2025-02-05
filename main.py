@@ -6,18 +6,21 @@ from src.Course import Course
 # prepare data
 school = School("СЗШ 32")
 student1 = Student("Nazar")
+student2 = Student("Nazar")
 teacher1 = Teacher("Mykola")
 course = Course("Math", teacher1, 5, 4, 5)
 
 # add teacher and student to course
 teacher1.add_course(course)
 course.add_student(student1)
+course.add_student(student2)
 
 # assign grade
-# teacher1.assign_grade(course, teacher1)
+teacher1.assign_grade(course, student1, 2)
 
 # add all to school
 school.add_student(student1)
+school.add_student(student2)
 school.add_teacher(teacher1)
 school.add_course(course)
 
