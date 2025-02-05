@@ -27,9 +27,10 @@ class Student(Person):
         pass
 
     def __repr__(self):
+        courses_ids = [course.id for course in self.courses]
         return (f'Student('
                 f'{super().__repr__()!r}, '
-                f'courses = {self.courses!r}, '
+                f'courses = {courses_ids!r}, '
                 f'grades = {self.grades!r}, '
                 f'grade_level = {self.grade_level!r}'
                 f')')
