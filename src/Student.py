@@ -27,7 +27,9 @@ class Student(Person):
         pass
 
     def __repr__(self):
-        return (f'{super().__repr__()} '
-                f'courses = {self.courses}, '
-                f'grades = {self.grades}, '
-                f'grade_level = {self.grade_level}')
+        return (f'Student('
+                f'{super().__repr__()},'
+                f'courses = {self.courses},'
+                f'grades = {self.grades},'
+                f'grade_level = {self.grade_level}'
+                f')')

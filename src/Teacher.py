@@ -19,6 +19,8 @@ class Teacher(Person):
         self.courses_teaching.remove(course)
 
     def __repr__(self):
-        return (f'{super().__repr__()} '
-                f'subject_specialty = {self.subject_specialty}, '
-                f'courses_teaching = {self.courses_teaching}')
+        return (f'Teacher('
+                f'{super().__repr__()},'
+                f'subject_specialty = {self.subject_specialty},'
+                f'courses_teaching = {self.courses_teaching}'
+                f')')

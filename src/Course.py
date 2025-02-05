@@ -5,7 +5,7 @@ from src.utils.Validations import validate_grade_level, validate_grade_credits
 
 class Course:
     def __init__(self, name: str, teacher, max_capacity, required_grade_level, _credits):
-        self.id = uuid.uuid4()
+        self.id = str(uuid.uuid4())
         self.name = name
         self.teacher = teacher
         self.students: list[Student] = []
@@ -27,7 +27,10 @@ class Course:
         pass
 
     def __repr__(self):
-        return (f'id = {self.id}, name = {self.name}, teacher = {self.teacher}, '
-                f'students = {self.students}, max_capacity = {self.max_capacity}, '
-                f'max_capacity = {self.max_capacity}, required_grade_level = {self.required_grade_level}, '
-                f'credits = {self.credits}')
+        return (f"Course(id = {self.id}, name = {self.name},"
+                f'teacher = {self.teacher},'
+                f'students = {self.students},'
+                f'max_capacity = {self.max_capacity},'
+                f'required_grade_level = {self.required_grade_level},'
+                f'credits = {self.credits}'
+                f')')
