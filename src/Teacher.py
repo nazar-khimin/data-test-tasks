@@ -21,6 +21,6 @@ class Teacher(Person):
     def __repr__(self):
         return (f'Teacher('
                 f'{super().__repr__()},'
-                f'subject_specialty = {self.subject_specialty},'
-                f'courses_teaching = {self.courses_teaching}'
+                f'subject_specialty = {self.subject_specialty!r},'
+                f'courses_teaching = {self.courses_teaching!r}'
                 f')')

@@ -31,8 +31,8 @@ class School:
 
     def __repr__(self):
         return (f'School('
-                f'name = {self.name},'
-                f'students = {self.students},'
-                f'teachers = {self.teachers},'
-                f'courses = {self.courses}'
+                f'name = {self.name!r}, '
+                f'students = {self.students!r}, '
+                f'teachers = {self.teachers!r}, '
+                f'courses = {self.courses!r}'
                 f')')

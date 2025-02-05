@@ -7,7 +7,7 @@ class Person:
         self.name = name
 
     def __repr__(self):
-        return (f"Person("
-                f"id = {self.id},"
-                f"name = {self.name}"
-                f")")
+        return (f'Person('
+                f'id = {self.id!r}, '
+                f'name = {self.name!r}'
+                f')')

@@ -27,10 +27,12 @@ class Course:
         pass
 
     def __repr__(self):
-        return (f"Course(id = {self.id}, name = {self.name},"
-                f'teacher = {self.teacher},'
-                f'students = {self.students},'
-                f'max_capacity = {self.max_capacity},'
-                f'required_grade_level = {self.required_grade_level},'
-                f'credits = {self.credits}'
+        return (f'Course('
+                f'id = {self.id!r}, '
+                f'name = {self.name!r}, '
+                f'teacher = {self.teacher!r}, '
+                f'students = {self.students!r}, '
+                f'max_capacity = {self.max_capacity!r},'
+                f'required_grade_level = {self.required_grade_level!r}, '
+                f'credits = {self.credits!r}'
                 f')')
