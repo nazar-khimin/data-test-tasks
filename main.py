@@ -21,8 +21,8 @@ course2.add_student(student2)
 
 # assign grade
 teacher1.assign_grade(course1, student1, 70)
-teacher1.assign_grade(course1, student1, 70)
-teacher1.assign_grade(course2, student2, 80)
+teacher1.assign_grade(course1, student2, 70)
+teacher1.assign_grade(course2, student1, 80)
 teacher1.assign_grade(course2, student2, 80)
 
 # add all to school
