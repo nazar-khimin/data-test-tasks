@@ -16,6 +16,9 @@ class Student(Person):
     def enroll_course(self, course: "Course"):
         self.courses.append(course)
 
+    def exclude_from_course(self, course: "Course"):
+        self.courses.remove(course)
+
     def add_grade(self, course: "Course", grade):
         if course not in self.courses:
             raise ValueError('Student is not enrolled in this course.')
