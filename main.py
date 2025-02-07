@@ -1,7 +1,7 @@
+from src.course import Course
 from src.school import School
 from src.student import Student
 from src.teacher import Teacher
-from src.course import Course
 
 # prepare data
 school = School("СЗШ 32")

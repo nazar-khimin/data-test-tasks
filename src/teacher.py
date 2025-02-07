@@ -2,9 +2,10 @@ from src.person import Person
 
 from src.course import Course
 from src.student import Student
+from src.utils.repr_generator import generate_repr
 from src.utils.validations import validate_grade_value
 
-
+@generate_repr()
 class Teacher(Person):
 
     def __init__(self, name, subject_specialties: list[str]):
@@ -23,11 +24,3 @@ class Teacher(Person):
     def remove_course(self, course: Course):
         course.teacher = None
         self.courses_teaching.remove(course)
-
-    def __repr__(self):
-        courses_ids = [course.id for course in self.courses_teaching]
-        return (f'Teacher('
-                f'{super().__repr__()}, '
-                f'subject_specialty = {self.subject_specialty_list!r}, '
-                f'courses_teaching = {courses_ids!r}'
-                f')')
