@@ -21,6 +21,7 @@ class Teacher(Person):
         course.teacher = self
 
     def remove_course(self, course: Course):
+        course.teacher = None
         self.courses_teaching.remove(course)
 
     def __repr__(self):
