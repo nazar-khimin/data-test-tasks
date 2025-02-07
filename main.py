@@ -7,7 +7,7 @@ from src.course import Course
 school = School("СЗШ 32")
 student1 = Student("Nazar")
 student2 = Student("Bohdan")
-teacher1 = Teacher("Mykola")
+teacher1 = Teacher("Mykola", ["Math", "Biology"])
 course1 = Course("Math", teacher1, 5, 4, 4)
 course2 = Course("Biology", teacher1, 5, 3, 4)
 
