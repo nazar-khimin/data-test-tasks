@@ -1,9 +1,9 @@
 from typing import TYPE_CHECKING
 
-from src.Person import Person
+from src.person import Person
 
 if TYPE_CHECKING:
-    from src.Course import Course
+    from src.course import Course
 
 
 class Student(Person):

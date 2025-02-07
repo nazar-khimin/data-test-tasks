@@ -1,6 +1,6 @@
-from src.Student import Student
-from src.Teacher import Teacher
-from src.Course import Course
+from src.student import Student
+from src.teacher import Teacher
+from src.course import Course
 
 
 class School:

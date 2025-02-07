@@ -1,8 +1,8 @@
-from src.Person import Person
+from src.person import Person
 
-from src.Course import Course
-from src.Student import Student
-from src.utils.Validations import validate_grade_value
+from src.course import Course
+from src.student import Student
+from src.utils.validations import validate_grade_value
 
 
 class Teacher(Person):

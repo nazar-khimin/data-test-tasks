@@ -1,7 +1,7 @@
 import uuid
-from src.Student import Student
-from src.utils.Errors import CourserMaxStudentsLimitException
-from src.utils.Validations import validate_grade_level, validate_grade_credits
+from src.student import Student
+from src.utils.errors import CourseMaxStudentsLimitException
+from src.utils.validations import validate_grade_level, validate_grade_credits
 
 
 class Course:
@@ -16,12 +16,13 @@ class Course:
 
     def add_student(self, student: Student):
         if self.is_full():
-            raise CourserMaxStudentsLimitException(f"Student {student.name} can't be added, courser is full.")
+            raise CourseMaxStudentsLimitException(f"Student {student.name} can't be added, courser is full.")
         self.students.append(student)
         student.enroll_course(self)
 
     def remove_student(self, student: Student):
         self.students.remove(student)
+    #     unenroll
 
     def is_full(self):
         return len(self.students) == self.max_capacity
