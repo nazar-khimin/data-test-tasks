@@ -1,11 +1,13 @@
 from typing import TYPE_CHECKING
 
-from src.Person import Person
+from src.person import Person
+from src.utils.repr_generator import generate_repr
 
 if TYPE_CHECKING:
-    from src.Course import Course
+    from src.course import Course
 
 
+@generate_repr(fields={"courses": "name"})
 class Student(Person):
     def __init__(self, name):
         super().__init__(name)
@@ -15,6 +17,9 @@ class Student(Person):
 
     def enroll_course(self, course: "Course"):
         self.courses.append(course)
+
+    def exclude_from_course(self, course: "Course"):
+        self.courses.remove(course)
 
     def add_grade(self, course: "Course", grade):
         if course not in self.courses:
@@ -31,12 +36,3 @@ class Student(Person):
         total_grade_points = sum(grade * course.credits for course, grade in self.grades.items())
         gpa = total_grade_points / total_credits
         return round(gpa, 1)
-
-    def __repr__(self):
-        courses_names = [course.name for course in self.courses]
-        return (f'Student('
-                f'{super().__repr__()!r}, '
-                f'courses = {courses_names!r}, '
-                f'grades = {self.grades!r}, '
-                f'grade_level = {self.grade_level!r}'
-                f')')

@@ -1,8 +1,10 @@
-from src.Student import Student
-from src.Teacher import Teacher
-from src.Course import Course
+from src.student import Student
+from src.teacher import Teacher
+from src.course import Course
+from src.utils.repr_generator import generate_repr
 
 
+@generate_repr(fields={"students": "name", "teachers": "name"})
 class School:
 
     def __init__(self, name: str):
@@ -28,14 +30,3 @@ class School:
 
     def remove_course(self, course: Course):
         self.courses.remove(course)
-
-    def __repr__(self):
-        courses_name = [course.name for course in self.courses]
-        teachers_name = [teacher.name for teacher in self.teachers]
-        students_name = [student.name for student in self.students]
-        return (f'School('
-                f'name = {self.name!r}, '
-                f'students = {students_name!r}, '
-                f'teachers = {teachers_name!r}, '
-                f'courses = {courses_name!r}'
-                f')')

@@ -1,0 +1,2 @@
+class CourseMaxStudentsLimitException(Exception):
+    pass
