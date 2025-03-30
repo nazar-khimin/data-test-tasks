@@ -66,9 +66,9 @@ pyspark-data-quality/
 git clone https://github.com/your-username/pyspark-data-quality.git
 cd pyspark-data-quality
 
-# Create a virtual environment (optional)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Create a virtual environment
+python -m venv data_quality_env
+source data_quality_env/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
