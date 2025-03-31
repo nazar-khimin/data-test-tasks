@@ -2,30 +2,26 @@ import os
 import pandas as pd
 import numpy as np
 
-
-# Function to check if wine dataset exists and generate corrupted dataset
 def generate_wine_datasets():
-    original_path = "./wine_quality_original.csv"
-    corrupted_path = "./wine_quality_corrupted.csv"
+    original_path = './wine_quality_original.csv'
+    corrupted_path = './wine_quality_corrupted.csv'
 
     if not os.path.exists(original_path):
-        print(f"Error: {original_path} not found. Please place the dataset in the 'datasets' folder.")
+        print(f'Error: {original_path} not found. Please place the dataset in the datasets folder.')
         return
 
-    df = pd.read_csv(original_path, delimiter=";")
-    print(f"Wine dataset loaded successfully from {original_path}")
+    df = pd.read_csv(original_path, delimiter=',')
+    print(f'Wine dataset loaded successfully from {original_path}')
 
-    # Optionally, you can introduce synthetic anomalies here (missing values, duplicates, etc.)
-    # Example: Adding random missing values to the 'alcohol' column
-    np.random.seed(42)
-    missing_values_indices = np.random.choice(df.index, size=50, replace=False)
-    df.loc[missing_values_indices, 'alcohol'] = np.nan
+    if 'alcohol' in df.columns:
+        np.random.seed(42)
+        missing_values_indices = np.random.choice(df.index, size=50, replace=False)
+        df.loc[missing_values_indices, 'alcohol'] = None
+        print(f'Random NaN values added to alcohol. Total NaNs: {df["alcohol"].isna().sum()}')
 
-    # Example: Adding duplicate records
     duplicates = df.sample(n=10, replace=True)
     df = pd.concat([df, duplicates], ignore_index=True)
 
-    # Example: Adding outliers to the 'fixed acidity' column
     outliers = pd.DataFrame({
         'fixed acidity': [20, 25, 30, 40, 50],
         'volatile acidity': [0.5, 0.6, 0.7, 0.8, 0.9],
@@ -41,10 +37,8 @@ def generate_wine_datasets():
     })
 
     df = pd.concat([df, outliers], ignore_index=True)
-
     df.to_csv(corrupted_path, index=False)
-    print(f"Synthetic anomalies added and saved to {corrupted_path}")
+    print(f'Corrupted dataset saved to {corrupted_path}')
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     generate_wine_datasets()
