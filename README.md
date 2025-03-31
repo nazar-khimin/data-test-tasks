@@ -84,12 +84,6 @@ pytest tests/
 spark-submit projects/data_quality_validation/main.py
 ```
 
-## 📢 Contributing
-Contributions are welcome! Feel free to submit issues or PRs. 🙌
-
-## 📜 License
-MIT License. See `LICENSE` for details.
-
 ---
 
 This should give you a good foundation for your **pyspark-data-quality** repo! Let me know if you need further modifications or have any questions. 😊
