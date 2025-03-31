@@ -1,89 +1,88 @@
-Here's the updated **README** with **Great Expectations** included in the tech stack:
+# Wine Quality Data Quality Validation
+
+This project demonstrates automated **data quality validation, profiling, anomaly detection, and root cause analysis** using **PySpark** and the **Wine Quality Dataset**. The goal is to showcase **data integrity checks, ETL validation, and data monitoring** in a real-world scenario.
+
+## 📌 Features
+
+### **1️⃣ Data Quality Validation**
+- Schema validation
+- Null value detection
+- Duplicate record checks
+- Range and threshold validation
+
+### **2️⃣ Data Profiling & Anomaly Detection**
+- Descriptive statistics
+- Outlier detection (Z-score, IQR)
+- Data drift monitoring
+
+### **3️⃣ ETL Validation**
+- Pre-ETL data quality checks
+- Post-ETL data validation
+- Transformation verification
+
+### **4️⃣ SQL Data Integrity Checks**
+- Referential integrity validation
+- Business rule enforcement
+- Historical data consistency
+
+### **5️⃣ Root Cause Analysis & Monitoring**
+- Logging & error tracking
+- Data lineage tracing
+- Pipeline monitoring
 
 ---
+## 📊 Dataset: Wine Quality Dataset
 
-# **pyspark-data-quality**
+I use the [Wine Quality Dataset](https://www.kaggle.com/datasets/yasserh/wine-quality-dataset/data), introducing **synthetic anomalies** (missing values, duplicates, outliers) for testing purposes.
 
-## 📌 Overview
-**pyspark-data-quality** is a collection of automation projects focused on ensuring data integrity, accuracy, and consistency in large-scale data pipelines using **PySpark, Databricks, SQL**, and **Great Expectations**. This repository demonstrates best practices for data validation, profiling, and monitoring in **ETL workflows**.
+---
+## 🚀 Setup & Installation
 
-## 📂 Repository Structure
-```
-pyspark-data-quality/
-│── README.md  # Project documentation
-│── projects/
-│   │── data_quality_validation/  # Schema, null, and duplicate checks
-│   │── data_profiling/  # Statistical profiling & anomaly detection
-│   │── etl_data_validation/  # Pre & post ETL validation
-│   │── sql_data_validation/  # SQL integrity & referential checks
-│   │── root_cause_analysis/  # Logging & monitoring
-│── datasets/  # Sample datasets for testing
-│── notebooks/  # Databricks notebooks for interactive analysis
-│── docs/  # Documentation
-│── .github/workflows/  # CI/CD automation
-│── LICENSE
-```
-
-## 🚀 Projects & Features
-### 1️⃣ **Automated Data Quality Validation**
-✅ Schema validation (PySpark)  
-✅ Null & duplicate detection  
-✅ Threshold-based data quality checks  
-
-### 2️⃣ **Data Profiling & Anomaly Detection**
-✅ Column-wise statistics (min, max, mean, std, nulls, unique values)  
-✅ Outlier detection (Z-score, IQR)  
-✅ Data drift monitoring (historical vs. new data)  
-✅ Automated validation with **Great Expectations**
-
-### 3️⃣ **ETL Data Validation Pipeline**
-✅ Pre-ETL validation (schema, row count, key constraints)  
-✅ Post-ETL validation (business rules, transformations)  
-✅ Automated rollback & alerting  
-
-### 4️⃣ **SQL-Based Data Integrity Validation**
-✅ Referential integrity checks  
-✅ Business rule validation  
-✅ Duplicate & historical data comparison  
-
-### 5️⃣ **Root Cause Analysis & Monitoring**
-✅ Structured logging of errors & transformations  
-✅ Data lineage tracking  
-✅ Databricks monitoring dashboard  
-
-## 🛠️ Tech Stack
-- **Python** (for scripting & automation)
-- **PySpark** (for distributed data processing)
-- **Databricks** (for data quality & analytics)
-- **SQL** (for data validation & integrity checks)
-- **Great Expectations** (for automated data validation & profiling)
-- **PyTest** (for test automation)
-- **GitHub Actions** (for CI/CD & automation)
-
-## 🔧 Setup & Installation
 ```sh
 # Clone the repository
-git clone https://github.com/your-username/pyspark-data-quality.git
-cd pyspark-data-quality
+git clone https://github.com/your-username/pyspark-wine-data-quality.git
+cd pyspark-wine-data-quality
 
-# Create a virtual environment
+# Create a virtual environment (optional)
 python -m venv venv
-source venv/bin/activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-## 🏗️ Running Tests
-```sh
-pytest tests/
+---
+## 📂 Project Structure
 ```
+pyspark-wine-data-quality/
+│── README.md
+│── projects/
+│   │── data_quality_validation/
+│   │── data_profiling/
+│   │── etl_data_validation/
+│   │── sql_data_validation/
+│   │── root_cause_analysis/
+│── datasets/
+│── notebooks/
+│── docs/
+│── .github/workflows/
+│── LICENSE
+```
+---
+## 📋 Running the Project
 
-## 📊 Running PySpark Scripts
+### **1️⃣ Run Data Quality Validation**
 ```sh
 spark-submit projects/data_quality_validation/main.py
 ```
 
----
+### **2️⃣ Run Tests**
+```sh
+pytest tests/
+```
 
-This should give you a good foundation for your **pyspark-data-quality** repo! Let me know if you need further modifications or have any questions. 😊
+---
+## 📝 Notebooks for Interactive Analysis
+- **data_quality_checks.ipynb** – Schema validation, null checks, duplicate detection
+- **etl_validation.ipynb** – Pre/post-ETL validation
+- **profiling_analysis.ipynb** – Statistical profiling & anomaly detection
