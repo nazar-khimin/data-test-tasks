@@ -1,5 +1,3 @@
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-
 def validate_schema(df, expected_schema):
     if df.schema == expected_schema:
         print("Schema is valid.")
