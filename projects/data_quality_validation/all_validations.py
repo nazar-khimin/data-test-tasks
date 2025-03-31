@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType
 from projects.data_quality_validation.schema_validation import validate_schema
 from projects.data_quality_validation.null_check import check_nulls
 from projects.data_quality_validation.duplicate_check import check_duplicates
