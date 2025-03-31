@@ -8,12 +8,10 @@ def generate_wine_datasets():
     original_path = "./wine_quality_original.csv"
     corrupted_path = "./wine_quality_corrupted.csv"
 
-    # Check if the Wine dataset exists locally
     if not os.path.exists(original_path):
         print(f"Error: {original_path} not found. Please place the dataset in the 'datasets' folder.")
         return
 
-    # Load the original dataset to ensure it's valid
     df = pd.read_csv(original_path, delimiter=";")
     print(f"Wine dataset loaded successfully from {original_path}")
 
@@ -24,8 +22,8 @@ def generate_wine_datasets():
     df.loc[missing_values_indices, 'alcohol'] = np.nan
 
     # Example: Adding duplicate records
-    duplicates = df.sample(n=10, replace=True)  # Fix: `replace=True` creates duplicates
-    df = pd.concat([df, duplicates], ignore_index=True)  # Fix: Correct method to combine DataFrames
+    duplicates = df.sample(n=10, replace=True)
+    df = pd.concat([df, duplicates], ignore_index=True)
 
     # Example: Adding outliers to the 'fixed acidity' column
     outliers = pd.DataFrame({
@@ -42,10 +40,8 @@ def generate_wine_datasets():
         'alcohol': [12, 13, 14, 15, 16]
     })
 
-    # Fix: Use `pd.concat` to combine outliers and the original DataFrame
     df = pd.concat([df, outliers], ignore_index=True)
 
-    # Save the dataset with synthetic anomalies to a separate file
     df.to_csv(corrupted_path, index=False)
     print(f"Synthetic anomalies added and saved to {corrupted_path}")
 
