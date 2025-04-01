@@ -24,12 +24,13 @@ class DataQualityChecks:
         z_scores = np.abs(stats.zscore(numeric_df, nan_policy='omit'))
         return (z_scores > 3).sum()
 
-    def check_outliers_iqr(self):
-        numeric_df = self.df.select_dtypes(include=[np.number])
-        Q1 = numeric_df.quantile(0.25)
-        Q3 = numeric_df.quantile(0.75)
-        IQR = Q3 - Q1
-        outliers = ((numeric_df < (Q1 - 1.5 * IQR)) | (numeric_df > (Q3 + 1.5 * IQR))).sum()
+    def check_outliers_iqr(self) -> pd.Series:
+        numeric_df: pd.DataFrame = self.df.select_dtypes(include=[np.number])
+        Q1: pd.Series = numeric_df.quantile(0.25)
+        Q3: pd.Series = numeric_df.quantile(0.75)
+        IQR: pd.Series = Q3 - Q1
+        outlier_mask: pd.DataFrame = numeric_df[(numeric_df < (Q1 - 1.5 * IQR)) | (numeric_df > (Q3 + 1.5 * IQR))]
+        outliers: pd.Series = outlier_mask.sum()
         return outliers[outliers > 0]
 
     def get_dataframe(self):
