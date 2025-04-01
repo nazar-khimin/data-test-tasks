@@ -4,12 +4,12 @@ WINE_QUALITY_SCHEMA: dict[str, str] = {
     "citric acid": "float",
     "residual sugar": "float",
     "chlorides": "float",
-    "free sulfur dioxide": "int",
-    "total sulfur dioxide": "int",
+    "free sulfur dioxide": "float",
+    "total sulfur dioxide": "float",
     "density": "float",
     "pH": "float",
     "sulphates": "float",
     "alcohol": "float",
-    "quality": "int",
-    "Id": "int",
+    "quality": "float",
+    "Id": "float"
 }
