@@ -6,12 +6,12 @@ class SchemaValidation:
     def __init__(self, df: pd.DataFrame):
         self.df = df
 
-    def check_column_names(self, schema: dict[str, str]):
+    def validate_column_names(self, schema: dict[str, str]):
         missing_columns = set(schema.keys()) - set(self.df.columns)
         extra_columns = set(schema.keys()) - set(self.df.columns)
         return {"missing_columns": list(missing_columns), "extra_columns": list(extra_columns)}
 
-    def check_data_types(self, type_schema: dict[str, str]):
+    def validate_data_types(self, type_schema: dict[str, str]):
         mismatched_types = {}
         type_mapping = {"float": "float64", "int": "int64"}  # Mapping to pandas dtypes
 
