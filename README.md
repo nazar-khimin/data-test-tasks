@@ -21,7 +21,6 @@ This project demonstrates automated **data quality validation, profiling, anomal
 ### **4️⃣ SQL Data Integrity Checks**
 - Referential integrity validation
 - Business rule enforcement
-- Historical data consistency
 
 ### **5️⃣ Root Cause Analysis & Monitoring**
 - Logging & error tracking
