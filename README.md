@@ -15,8 +15,8 @@ This project demonstrates automated **data quality validation, profiling, anomal
 - Outlier detection (Z-score, IQR)
 
 ### **3️⃣ ETL Validation**
-- Post-ETL data validation
-- Transformation verification
+- ETL validation checks  (row count, column, aggregation , completeness checks)
+- Business rule validation
 
 ### **4️⃣ SQL Data Integrity Checks**
 - Referential integrity validation
