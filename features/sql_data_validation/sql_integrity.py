@@ -1,5 +1,7 @@
 import sqlite3
-from features.utiils import logger
+
+from features.utils.logger_config import logger
+
 
 class SQLDataIntegrityChecks:
     def __init__(self, db_path: str):
