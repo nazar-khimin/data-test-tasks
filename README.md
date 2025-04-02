@@ -13,7 +13,6 @@ This project demonstrates automated **data quality validation, profiling, anomal
 ### **2️⃣ Data Profiling & Anomaly Detection**
 - Descriptive statistics
 - Outlier detection (Z-score, IQR)
-- Data drift monitoring
 
 ### **3️⃣ ETL Validation**
 - Pre-ETL data quality checks
