@@ -1,12 +1,12 @@
-name: Selective Notebook Runner
+name: Run Selected Notebook
 
 on:
   workflow_dispatch:
     inputs:
       notebook_path:
-        description: "Select the notebook to execute"
+        description: "Select the notebook to execute (relative path)"
         required: true
-        default: "notebooks/data_quality_checks.ipynb" # Default option
+        default: "notebooks/data_quality_checks.ipynb"  # Default notebook path
         type: choice
         options:
           - "notebooks/data_quality_checks.ipynb"
@@ -34,9 +34,9 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          pip install nbconvert papermill
+          pip install papermill
 
-      - name: Run selected notebook
+      - name: Execute Notebook
         run: |
           source venv/bin/activate
           papermill "${{ inputs.notebook_path }}" "${{ inputs.notebook_path%.ipynb }}_executed.ipynb"
