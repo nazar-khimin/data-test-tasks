@@ -6,7 +6,7 @@ on:
       notebook_path:
         description: "Select the notebook to execute (relative path)"
         required: true
-        default: "notebooks/data_quality_checks.ipynb"  # Default notebook path
+        default: "notebooks/data_quality_checks.ipynb"
         type: choice
         options:
           - "notebooks/data_quality_checks.ipynb"
@@ -15,6 +15,7 @@ on:
 
 jobs:
   run-notebook:
+    name: Run ${{ github.event.inputs.notebook_path }}
     runs-on: ubuntu-latest
 
     steps:
@@ -39,6 +40,7 @@ jobs:
       - name: Execute Notebook
         run: |
           source venv/bin/activate
-          output_path="${{ inputs.notebook_path%.* }}_executed.ipynb"
-          echo "Executing ${{ inputs.notebook_path }}..."
-          papermill "${{ inputs.notebook_path }}" "$output_path"
+          output_path="${{ github.event.inputs.notebook_path }}"
+          output_path="${output_path%.ipynb}_executed.ipynb"
+          echo "Executing ${{ github.event.inputs.notebook_path }}..."
+          papermill "${{ github.event.inputs.notebook_path }}" "$output_path"
