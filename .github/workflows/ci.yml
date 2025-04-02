@@ -38,6 +38,5 @@ jobs:
 
       - name: Execute Notebook
         run: |
-          cd $GITHUB_WORKSPACE  # Explicitly set the working directory
           source venv/bin/activate
-          papermill "${{ inputs.notebook_path }}" "${{ inputs.notebook_path%.ipynb }}_executed.ipynb"
+          papermill "${{ inputs.notebook_path }}" "notebooks/$(basename ${{ inputs.notebook_path }} .ipynb)_executed.ipynb"
