@@ -1,4 +1,4 @@
-name: Run Selected Notebook - ${{ inputs.notebook_path
+name: Run Selected Notebook - ${{ inputs.notebook_path }}
 on:
   workflow_dispatch:
     inputs:
