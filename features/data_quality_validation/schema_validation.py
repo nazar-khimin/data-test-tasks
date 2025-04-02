@@ -42,4 +42,4 @@ class SchemaValidation:
         valid_rows = self.df[self.df[column].apply(condition)]
         invalid_count = len(invalid_rows)
         valid_count = len(valid_rows)
-        return f"{invalid_count} rows violate {column} condition, {valid_count} rows meet the condition."
+        return invalid_count, valid_count
