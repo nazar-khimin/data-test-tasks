@@ -44,22 +44,7 @@ pip install -r requirements.txt
 ```
 
 ---
-## 📂 Project Structure
-```
-pyspark-wine-data-quality/
-│── README.md
-│── features/
-│   │── data_quality_validation/
-│   │── data_profiling/
-│   │── etl_data_validation/
-│   │── sql_data_validation/
-│── datasets/
-│── notebooks/
-│── .github/workflows/
-```
-
----
 ## 📝 Notebooks for Interactive Analysis
 - **data_quality_checks.ipynb** – Schema validation, null checks, duplicate detection
 - **etl_validation.ipynb** – Pre/post-ETL validation
-- **profiling_analysis.ipynb** – Statistical profiling & anomaly detection
+- **sql_integrity.ipynb** –
