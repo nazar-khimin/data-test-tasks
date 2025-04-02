@@ -15,7 +15,6 @@ This project demonstrates automated **data quality validation, profiling, anomal
 - Outlier detection (Z-score, IQR)
 
 ### **3️⃣ ETL Validation**
-- Pre-ETL data quality checks
 - Post-ETL data validation
 - Transformation verification
 
@@ -72,7 +71,7 @@ pyspark-wine-data-quality/
 
 ### **1️⃣ Run Data Quality Validation**
 ```sh
-spark-submit projects/data_quality_validation/main.py
+spark-submit features/data_quality_validation/main.py
 ```
 
 ### **2️⃣ Run Tests**
