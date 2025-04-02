@@ -48,17 +48,14 @@ pip install -r requirements.txt
 ```
 pyspark-wine-data-quality/
 │── README.md
-│── projects/
+│── features/
 │   │── data_quality_validation/
 │   │── data_profiling/
 │   │── etl_data_validation/
 │   │── sql_data_validation/
-│   │── root_cause_analysis/
 │── datasets/
 │── notebooks/
-│── docs/
 │── .github/workflows/
-│── LICENSE
 ```
 
 ---
