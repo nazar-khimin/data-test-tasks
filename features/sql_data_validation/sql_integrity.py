@@ -1,12 +1,12 @@
 import sqlite3
-
+from features.utils.logger_config import logger
 
 class SQLDataIntegrityChecks:
     def __init__(self, db_path: str):
         try:
             self.conn = sqlite3.connect(db_path)
             self.cursor = self.conn.cursor()
-            print(f"Connected to database: {db_path}")
+            logger.info(f"Connected to database: {db_path}")
         except sqlite3.Error as e:
             raise ConnectionError(f"Failed to connect to database: {db_path}. Error: {e}")
 
@@ -32,8 +32,8 @@ class SQLDataIntegrityChecks:
             results = self.cursor.fetchall()
             missing_count = len(results)
             if missing_count > 0:
-                print(f"Referential Integrity Violations: {missing_count}")
-                print(f"Violating Values: {results}")
+                logger.info(f"Referential Integrity Violations: {missing_count}")
+                logger.info(f"Violating Values: {results}")
             return missing_count
         except sqlite3.Error as e:
             raise RuntimeError(f"Error in referential integrity check: {e}")
@@ -50,6 +50,6 @@ class SQLDataIntegrityChecks:
     def close(self):
         try:
             self.conn.close()
-            print("Database connection closed.")
+            logger.info("Database connection closed.")
         except sqlite3.Error as e:
             raise RuntimeError(f"Failed to close database connection: {e}")
