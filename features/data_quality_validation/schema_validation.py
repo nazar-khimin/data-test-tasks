@@ -36,3 +36,10 @@ class SchemaValidation:
             return "All values within expected ranges."
         else:
             return "\n".join(violations)
+
+    def validate_business_rules(self, column: str, condition):
+        invalid_rows = self.df[~self.df[column].apply(condition)]
+        valid_rows = self.df[self.df[column].apply(condition)]
+        invalid_count = len(invalid_rows)
+        valid_count = len(valid_rows)
+        return f"{invalid_count} rows violate {column} condition, {valid_count} rows meet the condition."
