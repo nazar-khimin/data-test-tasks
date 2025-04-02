@@ -1,7 +1,7 @@
 from pathlib import Path
 
 class PathUtils:
-    ROOT_DIR = Path(__file__).parent.parent
+    ROOT_DIR = Path(__file__).parent.parent.parent
 
     @staticmethod
     def resolve_path(relative_path: str) -> Path:
