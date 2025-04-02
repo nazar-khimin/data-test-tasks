@@ -36,7 +36,18 @@ jobs:
           pip install -r requirements.txt
           pip install papermill
 
+      - name: Enable Notebook Logging
+        run: |
+          echo "Preparing to execute notebook..."
+          echo "Input Notebook: ${{ inputs.notebook_path }}"
+          echo "Output Notebook: notebooks/$(basename ${{ inputs.notebook_path }} .ipynb)_executed.ipynb"
+
       - name: Execute Notebook
         run: |
           source venv/bin/activate
           papermill "${{ inputs.notebook_path }}" "notebooks/$(basename ${{ inputs.notebook_path }} .ipynb)_executed.ipynb"
+
+      - name: Verify Execution Logs
+        run: |
+          echo "Notebook execution completed. Verifying logs..."
+          cat "notebooks/$(basename ${{ inputs.notebook_path }} .ipynb)_executed.ipynb"
