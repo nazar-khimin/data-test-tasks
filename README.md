@@ -22,11 +22,6 @@ This project demonstrates automated **data quality validation, profiling, anomal
 - Referential integrity validation
 - Business rule enforcement
 
-### **5️⃣ Root Cause Analysis & Monitoring**
-- Logging & error tracking
-- Data lineage tracing
-- Pipeline monitoring
-
 ---
 ## 📊 Dataset: Wine Quality Dataset
 
@@ -64,18 +59,6 @@ pyspark-wine-data-quality/
 │── docs/
 │── .github/workflows/
 │── LICENSE
-```
----
-## 📋 Running the Project
-
-### **1️⃣ Run Data Quality Validation**
-```sh
-spark-submit features/data_quality_validation/main.py
-```
-
-### **2️⃣ Run Tests**
-```sh
-pytest tests/
 ```
 
 ---
