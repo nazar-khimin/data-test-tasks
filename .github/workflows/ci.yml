@@ -1,13 +1,22 @@
-name: CI/CD Pipeline
+name: Selective Notebook Runner
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      notebook_path:
+        description: "Select the notebook to execute"
+        required: true
+        default: "notebooks/data_quality_checks.ipynb" # Default option
+        type: choice
+        options:
+          - "notebooks/data_quality_checks.ipynb"
+          - "notebooks/etl_validation.ipynb"
+          - "notebooks/sql_integrity.ipynb"
 
 jobs:
-  test:
+  run-notebook:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -18,16 +27,16 @@ jobs:
           python-version: '3.9'
 
       - name: Upgrade pip
-        run: |
-          python -m pip install --upgrade pip
+        run: python -m pip install --upgrade pip
 
       - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+          pip install nbconvert papermill
 
-      - name: Run tests
+      - name: Run selected notebook
         run: |
           source venv/bin/activate
-          pytest
+          papermill "${{ inputs.notebook_path }}" "${{ inputs.notebook_path%.ipynb }}_executed.ipynb"
