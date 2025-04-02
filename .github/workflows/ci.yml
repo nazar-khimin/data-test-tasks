@@ -39,4 +39,5 @@ jobs:
       - name: Execute Notebook
         run: |
           source venv/bin/activate
-          papermill "${{ inputs.notebook_path }}" "${{ inputs.notebook_path%.ipynb }}_executed.ipynb"
+          output_path="${{ inputs.notebook_path/.ipynb/_executed.ipynb }}"
+          papermill "${{ inputs.notebook_path }}" "$output_path"
