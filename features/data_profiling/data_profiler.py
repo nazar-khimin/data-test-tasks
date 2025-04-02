@@ -4,11 +4,9 @@ class DataProfiler:
 
     def generate_statistics(self):
         stats = self.df.describe().T
-        print("Descriptive Statistics:")
-        print(stats)
-
-        print("\nAdditional Statistics:")
-        for col in self.df.columns:
-            null_count = self.df[col].isnull().sum()
-            unique_count = self.df[col].nunique()
-            print(f"Column: {col} | Null Count: {null_count} | Unique Count: {unique_count}")
+        stats_string = f"Descriptive Statistics:\n{stats.to_string()}\n\nAdditional Statistics:\n"
+        additional_stats = "\n".join(
+            [f"Column: {col} | Null Count: {self.df[col].isnull().sum()} | Unique Count: {self.df[col].nunique()}"
+             for col in self.df.columns]
+        )
+        return stats_string + additional_stats
