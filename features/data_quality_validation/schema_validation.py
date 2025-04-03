@@ -1,45 +1,44 @@
-import pandas as pd
-
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, FloatType, IntegerType
+from pyspark.sql.functions import col
 
 class SchemaValidation:
-
-    def __init__(self, df: pd.DataFrame):
+    def __init__(self, df):
         self.df = df
 
-    def validate_column_names(self, schema: dict[str, str]):
-        missing_columns = set(schema.keys()) - set(self.df.columns)
-        extra_columns = set(schema.keys()) - set(self.df.columns)
+    def validate_column_names(self, schema: dict[str, str]) -> dict[str, list[str]]:
+        df_columns = set(self.df.columns)
+        expected_columns = set(schema.keys())
+        missing_columns = expected_columns - df_columns
+        extra_columns = df_columns - expected_columns
         return {"missing_columns": list(missing_columns), "extra_columns": list(extra_columns)}
 
-    def validate_data_types(self, type_schema: dict[str, str]):
+    def validate_data_types(self, type_schema: dict[str, str]) -> dict[str, dict[str, str]]:
         mismatched_types = {}
-        type_mapping = {"float": "float64", "int": "int64"}  # Mapping to pandas dtypes
-
+        spark_type_mapping = {"float": FloatType(), "int": IntegerType()}
         for column, expected_type in type_schema.items():
             if column in self.df.columns:
-                actual_type = str(self.df[column].dtype)
-                mapped_expected_type = type_mapping.get(expected_type, expected_type)  # Map expected type
-
-                if actual_type != mapped_expected_type:
-                    mismatched_types[column] = {"expected": mapped_expected_type, "actual": actual_type}
-
+                actual_type = self.df.schema[column].dataType
+                expected_spark_type = spark_type_mapping.get(expected_type, expected_type)
+                if not isinstance(actual_type, type(expected_spark_type)):
+                    mismatched_types[column] = {
+                        "expected": str(expected_spark_type),
+                        "actual": str(actual_type),
+                    }
         return mismatched_types
 
-    def validate_ranges(self, ranges_schema: dict[str, tuple[float, float]]) -> str:
+    def validate_ranges(self, range_schema: dict[str, tuple[float, float]]) -> str:
         violations = []
-        for column, (min_value, max_value) in ranges_schema.items():
+        for column, (min_value, max_value) in range_schema.items():
             if column in self.df.columns:
-                invalid_rows = self.df[(self.df[column] < min_value) | (self.df[column] > max_value)]
-                if not invalid_rows.empty:
-                    violations.append(f"{len(invalid_rows)} invalid rows in column '{column}'.")
-        if not violations:
-            return "All values within expected ranges."
-        else:
-            return "\n".join(violations)
+                invalid_count = self.df.filter(
+                    (col(column) < min_value) | (col(column) > max_value)
+                ).count()
+                if invalid_count > 0:
+                    violations.append(f"{invalid_count} invalid rows in column '{column}'.")
+        return "All values within expected ranges." if not violations else "\n".join(violations)
 
-    def validate_business_rules(self, column: str, condition):
-        invalid_rows = self.df[~self.df[column].apply(condition)]
-        valid_rows = self.df[self.df[column].apply(condition)]
-        invalid_count = len(invalid_rows)
-        valid_count = len(valid_rows)
-        return invalid_count, valid_count
+    def validate_business_rules(self, column: str, condition) -> tuple[int, int]:
+        invalid_rows = self.df.filter(~condition(col(column))).count()
+        valid_rows = self.df.filter(condition(col(column))).count()
+        return invalid_rows, valid_rows
