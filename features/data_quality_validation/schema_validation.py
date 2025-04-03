@@ -39,6 +39,6 @@ class SchemaValidation:
         return "All values within expected ranges." if not violations else "\n".join(violations)
 
     def validate_business_rules(self, column: str, condition) -> tuple[int, int]:
-        invalid_rows = self.df.filter(~condition(col(column))).count()
+        invalid_rows = self.df.filter(condition(col(column)) == False).count()
         valid_rows = self.df.filter(condition(col(column))).count()
         return invalid_rows, valid_rows
