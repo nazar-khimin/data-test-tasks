@@ -1,5 +1,4 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, FloatType, IntegerType
+from pyspark.sql.types import FloatType, IntegerType
 from pyspark.sql.functions import col
 
 class SchemaValidation:
@@ -29,14 +28,19 @@ class SchemaValidation:
 
     def validate_ranges(self, range_schema: dict[str, tuple[float, float]]) -> str:
         violations = []
-        for column, (min_value, max_value) in range_schema.items():
+        for column, value_range in range_schema.items():
             if column in self.df.columns:
+                min_value, max_value = value_range
                 invalid_count = self.df.filter(
                     (col(column) < min_value) | (col(column) > max_value)
                 ).count()
                 if invalid_count > 0:
                     violations.append(f"{invalid_count} invalid rows in column '{column}'.")
+            else:
+                violations.append(f"Column '{column}' not found in DataFrame.")
+
         return "All values within expected ranges." if not violations else "\n".join(violations)
+
 
     def validate_business_rules(self, column: str, condition) -> tuple[int, int]:
         invalid_rows = self.df.filter(condition(col(column)) == False).count()

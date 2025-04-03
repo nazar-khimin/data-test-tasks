@@ -1,22 +1,35 @@
-import numpy as np
-import pandas as pd
-from scipy.stats import stats
+from pyspark.sql import DataFrame
+from pyspark.sql.functions import col, mean, stddev
 
 
 class OutlierDetection:
-    def __init__(self, df):
+    def __init__(self, df: DataFrame):
         self.df = df
 
-    def check_outliers_zscore(self):
-        numeric_df = self.df.select_dtypes(include=[np.number])
-        z_scores = np.abs(stats.zscore(numeric_df, nan_policy='omit'))
-        return (z_scores > 3).sum()
+    def check_outliers_zscore(self) -> dict:
+        mean_stddev = self.df.select([mean(col(c)).alias(f"{c}_mean") for c in self.df.columns] +
+                                     [stddev(col(c)).alias(f"{c}_stddev") for c in self.df.columns])
+        mean_stddev = mean_stddev.collect()[0].asDict()
 
-    def check_outliers_iqr(self) -> pd.Series:
-        numeric_df: pd.DataFrame = self.df.select_dtypes(include=[np.number])
-        Q1: pd.Series = numeric_df.quantile(0.25)
-        Q3: pd.Series = numeric_df.quantile(0.75)
-        IQR: pd.Series = Q3 - Q1
-        outlier_mask: pd.DataFrame = numeric_df[(numeric_df < (Q1 - 1.5 * IQR)) | (numeric_df > (Q3 + 1.5 * IQR))]
-        outliers: pd.Series = outlier_mask.sum()
-        return outliers[outliers > 0]
+        outliers = {}
+        for column in self.df.columns:
+            mean_value = mean_stddev[f"{column}_mean"]
+            stddev_value = mean_stddev[f"{column}_stddev"]
+            outliers[column] = self.df.filter(
+                (col(column) > mean_value + 3 * stddev_value) | (col(column) < mean_value - 3 * stddev_value)
+            ).count()
+
+        return outliers
+
+    def check_outliers_iqr(self) -> dict:
+        quantiles = self.df.approxQuantile(self.df.columns, [0.25, 0.75], 0.05)
+
+        outliers = {}
+        for i, column in enumerate(self.df.columns):
+            Q1, Q3 = quantiles[i]
+            IQR = Q3 - Q1
+            outliers[column] = self.df.filter(
+                (col(column) < (Q1 - 1.5 * IQR)) | (col(column) > (Q3 + 1.5 * IQR))
+            ).count()
+
+        return outliers
