@@ -1,13 +1,14 @@
 import os
 import pandas as pd
 import numpy as np
+from features.utils.logger_config import logger
 
 def generate_wine_datasets():
     original_path = './wine_quality_original.csv'
     corrupted_path = './wine_quality_corrupted.csv'
 
     if not os.path.exists(original_path):
-        print(f'Error: {original_path} not found. Please place the dataset in the datasets folder.')
+        logger.info(f'Error: {original_path} not found. Please place the dataset in the datasets folder.')
         return
 
     df = pd.read_csv(original_path, delimiter=',')
@@ -17,7 +18,7 @@ def generate_wine_datasets():
         np.random.seed(42)
         missing_values_indices = np.random.choice(df.index, size=50, replace=False)
         df.loc[missing_values_indices, 'alcohol'] = None
-        print(f'Random NaN values added to alcohol. Total NaNs: {df["alcohol"].isna().sum()}')
+        logger.info(f'Random NaN values added to alcohol. Total NaNs: {df["alcohol"].isna().sum()}')
 
     duplicates = df.sample(n=10, replace=True)
     df = pd.concat([df, duplicates], ignore_index=True)
@@ -38,7 +39,7 @@ def generate_wine_datasets():
 
     df = pd.concat([df, outliers], ignore_index=True)
     df.to_csv(corrupted_path, index=False)
-    print(f'Corrupted dataset saved to {corrupted_path}')
+    logger.info(f'Corrupted dataset saved to {corrupted_path}')
 
 if __name__ == '__main__':
     generate_wine_datasets()
